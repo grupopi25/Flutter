@@ -9,11 +9,21 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
+bool temaAtualeBlack = true;
+void _temaBotao(){
+  setState(() {
+    temaAtualeBlack = !temaAtualeBlack;
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      theme:ThemeData.light() ,
+      darkTheme: ThemeData.dark(),
+      themeMode: temaAtualeBlack ? ThemeMode.dark :  ThemeMode.light,
+       home: HomePage(botaoPrecionado: temaAtualeBlack,temaEscolhido: _temaBotao,),
     );
   }
 }

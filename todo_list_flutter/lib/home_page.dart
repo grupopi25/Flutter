@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final bool botaoPrecionado;
+  final VoidCallback temaEscolhido;
+  const HomePage({super.key, required this.botaoPrecionado, required this.temaEscolhido});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -10,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 final _formKey = GlobalKey<FormState>();
 final TextEditingController _controller = TextEditingController();
+final  List _minhasTarefas = [];
 validator(){
   if(_formKey.currentState!.validate()){
     setState(() {
@@ -18,7 +21,7 @@ validator(){
     });
   }
 }
-  List _minhasTarefas = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ validator(){
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         title: Text('Todo List',style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),),
-        actions: [IconButton(onPressed: (){}, icon:Icon(Icons.light_mode,color: Colors.white,))],
+        actions: [IconButton(onPressed: widget.temaEscolhido, icon:Icon(widget.botaoPrecionado ? Icons.light_mode : Icons.dark_mode,color: Colors.white,))],
       ),
       body: SizedBox(
         child: Padding(
